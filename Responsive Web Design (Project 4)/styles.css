@@ -1,0 +1,215 @@
+/* Product Landing Page Project CSS File*/
+
+@media (prefers-reduced-motion: no-preference) {
+  * {
+    scroll-behavior: smooth;
+  }
+}
+
+*{
+  font-family: 'Open Sans', sans-serif;
+  background-color: #eee;
+}
+header{
+  width:100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height:7%;
+  /* background-color: black; */
+  display:flex;
+  bottom: 100px;
+}
+img{
+  height:80%;
+  padding-left: 2.5%;
+  padding-top:10px;;
+}
+nav{
+  display:flex;
+  padding-left:45%;
+  padding-top:1%;
+}
+nav p{
+  padding-right: 100px;
+}
+
+nav p:first-of-type{
+  padding-right: 120px;
+}
+
+nav p:last-of-type{
+  padding-left: 30px;
+}
+main{
+  margin-top:6%;
+}
+section{
+  /* background-color: black; */
+  width:60%;
+  margin: auto;
+  text-align: center;
+  
+}
+#email{
+  background-color: white;
+  width:25%;
+  height:25px;
+  margin-bottom: 1.5%;
+}
+#submit{
+  background-color: rgb(255,185,0);
+  height: 25px;
+  width:15%;
+  font-weight: bold;
+  font-size: 1rem;
+  border:none;
+  padding-top:5px;
+  padding-bottom: 5px;
+  text-align:center;
+  transition: background-color 0.5s ease;
+}
+#submit:hover{
+  background-color: rgb(255,130,0);
+  cursor: pointer;
+}
+h2{
+  font-size: 1.5rem;
+}
+
+
+#Features{
+  padding-top: 5%;
+  margin: auto;
+  
+}
+
+.first, .second, .third{
+  display: flex;
+  padding-bottom: 6%;
+}
+.description{
+  text-align: left;
+
+}
+
+.description h2{
+  margin: 0;
+  padding: 0;
+}
+.description p{
+  margin:0;
+  padding: 0;
+  font-size: 0.9rem;
+}
+.logo{
+  display:flex;
+  padding-right:10%;
+  padding-left: 7%;
+  color: darkorange;
+  margin: auto;
+}
+.first .description{
+  padding-right: 6%;
+}
+
+#How_it_works{
+  /* background-color:black; */
+  margin-top:5%;
+  margin-bottom: 5%;
+}
+
+#Pricing{
+  display: flex;
+  text-align: center;
+  padding-bottom: 50px;
+}
+.tenor, .bass, .valve{
+  width:550px;
+  height: 310px;
+  /* background-color: black; */
+  border: 1px solid black;
+  margin-right:1%;
+}
+
+.logo{
+  /* padding-top: 25px; */
+  /* padding-bottom: 70px; */
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+.tenor h3, .bass h3, .valve h3{
+  width:100%;
+  height:40px;
+  background-color: #ddd;
+  position:relative;
+  bottom:6.1%;
+  padding-top: 5%;
+}
+.price{
+  font-size: 1.5rem;
+  font-weight: bold;
+  position: relative;
+  bottom: 8%;
+}
+.content{
+  line-height:0.8;
+  position: relative;
+  bottom: 7%;
+}
+#Pricing input{
+  border: none;
+  background-color: rgb(255,185,0);
+  width: 29%;
+  height: 12%;
+  font-size: 1rem;
+  transition: background-color 0.5s ease;
+}
+
+#Pricing input:hover{
+  background-color: rgb(255,130,0);
+  cursor: pointer;
+
+}
+
+footer{
+  width:60%;
+  position: absolute;
+  left: 19.5%;
+}
+
+
+.footer1{
+  display: flex;
+  background-color: #ddd;
+  padding-top: 18px;
+  padding-left: 76.5%;
+  font-size:0.95rem;
+}
+.footer2 p{
+  font-size: 0.9rem;
+  height: 40px;
+  padding-top:8px;
+  font-weight: 100;
+}
+
+.footer1 p, .footer2 p{
+  padding-right: 25px;
+  background: #ddd;
+  margin:0;
+  padding-bottom:1px;
+  text-align:right;
+}
+
+.footer1 p:last-of-type{
+  padding-right:0px;
+}
+a{
+  color: black;
+  text-decoration: none;
+  background-color: #ddd;
+}
+nav a{
+  background-color: #eee;
+}
