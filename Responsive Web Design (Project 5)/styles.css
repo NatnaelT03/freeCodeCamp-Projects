@@ -1,0 +1,202 @@
+/* Personal Portfolio Webpage Project CSS File*/
+
+
+@media (prefers-reduced-motion: no-preference) {
+  * {
+    scroll-behavior: smooth;
+  }
+}
+
+*{
+  font-family: sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  
+}
+header{
+  position: fixed;
+  top:0;
+  left: 0;
+  width: 100%;
+  background-color: rgb(199,50,50);
+  height: 75px;
+}
+nav{
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 25px;
+  
+}
+nav a{
+  color: black;
+  text-decoration: none;
+}
+nav p{
+  padding: 25px 25.5px 25px 25.5px;
+  margin:0;
+  font-size: 1.3rem;
+}
+nav p:hover{
+  background-color: blue;
+}
+
+#welcome-section {
+  background-color: black;
+  height:100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  
+}
+
+
+#welcome-section h1, #links h1{
+  color:white;
+  font-size:3.8rem;
+  padding-bottom:10px;
+}
+#welcome-section p{
+  color: red;
+  font-size:2rem;
+  font-weight: 1;
+  font-style: italic;
+}
+
+#projects{
+  width: 100%;
+  height: 1350px;
+  padding: 100px 80px 100px 110px; 
+  background-color: rgb(160,180,255);
+  text-align: center;
+  
+
+}
+
+#projects h1{
+  text-align: center;
+  text-decoration: underline;
+  font-size: 2.2rem;
+  color: white;
+  padding-bottom: 80px;
+
+}
+
+.project-tile{
+  width: 100%;
+  height: 1010px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  
+}
+.project-tile div{
+  width:420px;
+  height:430px;
+  margin-bottom: 1%;
+  background-color: black;
+  border-radius: 5px;
+  display:flex;
+  flex-wrap: wrap;
+  color: white;
+  justify-content: center;
+  font-size: 1.2rem;
+  transition: content 0.5s ease-out;
+}
+.project-tile div:hover::after{
+  content: "/>";
+  font-size: 1.2 rem;
+  color: orange;
+  padding-left: 6px;
+}
+.project-tile div:hover p::before{
+  content: "<";
+  font-size: 1.2rem;
+  color: orange;
+  padding-right: 6px;
+}
+img{
+  width: 100%;
+  height: 80%;
+  object-fit: cover;
+}
+input{
+  width: 135px;
+  height: 45px;
+  font-size: 1.3rem;
+  transition: background-color 0.5s ease;
+  border: 0;
+}
+input:hover{
+  background-color: red;
+}
+#links{
+  background-color: black;
+  height:810px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  
+}
+#socials{
+  margin-top: 65px;
+  margin-left:140px;
+}
+
+#links p{
+  color: white;
+  font-size:1.2rem;
+  font-weight: 1;
+  font-style: italic;
+}
+
+i{
+  color: white;
+  transform: scale(1.65);
+  transition: transform 0.5s ease;
+  margin-right: 90px;
+  text-align: center;
+  
+}
+i:hover{
+  transform: translateY(8px);
+}
+#footer{
+  width: 100%;
+  height: 80px;
+  background-color: black;
+  color: white;
+  
+}
+.breakp{
+  border: 1px solid red;
+  width: 100%;
+}
+
+.notice{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top:25px;
+  font-size: 1.18rem;
+}
+.notice p:first-of-type{
+  margin-right: 285px;
+}
+i:last-of-type{
+  margin-left: 20px;
+}
+.project-tile a {
+  color: black;
+  text-decoration: none;
+  margin-right: 3%;
+}
+#socials a, #footer a{
+  color: white;
+  text-decoration: none;
+}
