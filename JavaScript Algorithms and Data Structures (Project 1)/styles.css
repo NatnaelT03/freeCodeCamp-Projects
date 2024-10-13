@@ -1,0 +1,65 @@
+/* Palindrome Checker Project CSS File*/
+
+
+body{
+    background-color: black;
+    width: 50%;
+    margin: auto;
+    text-align: center;
+    margin-top: 17%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+  h1{
+    color: white;
+    font-size: 2.5rem;
+    margin-top:4%;
+    
+  }
+  img{
+    background-color: black;
+    width:50%;
+    transform: scale(0.7);
+    padding: 0;
+  }
+  .box{
+    background-color: white;
+    width: 50%;
+    margin: auto;
+    padding: 17px;
+    border-radius: 15px;
+  }
+  .box p{
+    font-size: 1.15rem;
+  }
+  input{
+    width: 55%;
+    margin-right: 2%;
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
+    border-bottom: 3px solid purple;
+    font-size: 1.2rem;
+  }
+  button{
+    background-color: purple;
+    padding: 10px;
+    border-radius: 15px;
+    width: 65px;
+    border:0;
+  }
+  button:hover{
+    cursor: pointer;
+  }
+  .description{
+    background-color: green;
+    width: 50%;
+    margin: auto;
+    font-size: 1.2rem;
+    padding: 7px;
+    margin-top: 27px;
+    border-radius: 15px;
+  }
+  .description p{
+    width: 85%;
+    margin: auto;
+  }
