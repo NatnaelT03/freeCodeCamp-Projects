@@ -1,0 +1,104 @@
+/* Cash Register Project CSS File */
+
+body{
+    background-color: #0a0a23;
+    width: 100%;
+    text-align: center;
+    margin-top: 5%;
+}
+img{
+    width:50%;
+    transform: scale(0.7);
+    background-color: #0a0a23;
+    margin-top: 3%;
+  }
+.container{
+    margin-left: 35%;
+    margin-top: 3%;
+    width: 60%;
+}
+.price-container{
+    width: 20%;
+    height:19px;
+    border: 5px solid #99c9ff;
+    margin-left: 4%;
+}
+.price-container p{
+    color: white;
+    position: relative;
+    bottom: 90%;
+
+    font-size: 1.1rem;
+
+}
+.connector{
+    width:3%;
+    height: 15px;
+    border: 5px solid #99c9ff;
+    background-color: #99c9ff;
+    margin-left: 7%;
+}
+.header{
+    width:45%;
+    height: 8px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: #99c9ff;
+}
+.main-part{
+    width: 45%;
+    height: 200px;
+    background-color: #99c9ff;
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 10px;
+}
+
+.box{
+    width: 10px;
+    height: 10px;
+    background-color: black;
+    margin: 2px;
+}
+
+.buttons-container{
+    width: 50px;
+    height: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    background-color:#99c9ff;
+    margin-left: 3%;
+}
+.content{
+    width: 120px;
+    height: 180px;
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: 20px;
+    background-color: white;
+    padding: 5px;
+}
+.content p{
+    margin: 0;
+}
+.footer{
+    width: 45%;
+    height: 20px;
+    margin-top: 2px;
+    padding-top:5px;
+    background-color: #99c9ff;
+}
+.circle{
+    width: 15px;
+    height: 15px;
+    background-color: black;
+    margin: auto;
+    border-radius: 20px;
+}
+input{
+    width: 25%;
+}
+button{
+    padding: 3px;
+    background-color: orange;
+}
