@@ -1,5 +1,5 @@
 // Cash Register Project JavaScript File
-// Couldn't let is pass tests 16-19
+// Couldn't let is pass tests 16-19 but works fine until very small amounts left 
 
 let price = 1.87;
 let cid = [
