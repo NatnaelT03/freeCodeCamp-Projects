@@ -1,0 +1,106 @@
+/* Pokemon Search App Project CSS File */
+
+body{
+   background-color: #1b1b32;
+   display: flex;
+   flex-wrap: wrap;
+   align-items: center;
+   justify-content: center;
+}
+
+.freecodecamp-logo, h1 {
+    width: 100%; 
+    text-align: center; 
+}
+
+.main-body{
+    background-color: white;
+    width: 350px;
+    height: 100%;
+    padding: 10px;
+    border-radius: 30px;
+    box-shadow: 10px 10px 0px 0px rgba(223, 220, 220, 0.75);
+    
+}
+.freecodecamp-logo{
+    width:50%;
+    transform: scale(0.9);
+    background-color: #0a0a23;
+    margin-top: 3%; 
+}
+
+.main-body p{
+    text-align: center; 
+}
+
+input{
+    margin-left: 65px;
+    height: 25px;
+    font-size: 1.2rem;
+    width: 150px;
+}
+
+button{
+    margin-left: 5px;
+    background-color: purple;
+    border: 0;
+    border-radius: 20px;
+    padding: 5px;
+    height: 30px;
+    width: 60px;
+}
+
+#pokemon-name, #pokemon-id{
+    padding: 15px 0px;
+    font-size: 1.25rem;;
+}
+
+#weight_and_height, #name-and-id{
+    display: flex;
+}
+
+#weight, #height{
+    padding-right: 15px;
+    padding-bottom: 15px;
+    font-size: 0.9rem;
+}
+
+#img{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 150px;
+    margin-bottom: 15px;
+    transform: scale(2.0)
+}
+#types{
+    display: flex;
+}
+
+.types{
+    background-color: brown;
+    width: 70px;
+    text-align: center;
+    padding: 3px;
+    margin: 5px;
+}
+
+table{
+    border-spacing: 5px;
+}
+tr{
+    background-color: purple;
+}
+
+th{
+    width: 220px;
+    height: 30px;
+    color: white;
+}
+
+td{
+    text-align: center;
+    color: white;
+    width: 130px;
+}
+
