@@ -1,0 +1,73 @@
+* {
+  box-sizing: border-box;
+  font-family: Outfit;
+}
+
+body{
+  margin: 0;
+  padding: 0;
+  height: 100%
+}
+
+.container-center{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; 
+  background-color: black;
+  margin: 0;
+  padding: 0;
+  
+
+}
+
+#quote-box{
+  background-color: white;
+  max-width: 650px;
+  max-height: 350px;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+#quote-box #text{
+  font-size: 1.6rem;
+  font-weight: bolder;
+  
+}
+
+
+#new-quote{
+  float: right;
+}
+
+
+.icon{
+  border: 0;
+  margin-right: 30px;
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+i{
+  transform: scale(1.7);
+}
+
+button:last-of-type{
+  border: 0;
+  margin-right: 30px;
+  height: 30px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.author{
+  text-align: right;
+}
+
+.author{
+  font-size: 1.3rem;
+}
+
+
