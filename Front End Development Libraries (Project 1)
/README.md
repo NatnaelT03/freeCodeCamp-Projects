@@ -1,1 +1,1 @@
-The first project in the Front ENd Devleopment Libraries where you build a Random Quote Machine
+The first project in the Front End Devlopment Libraries where you build a Random Quote Machine
