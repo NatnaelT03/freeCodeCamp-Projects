@@ -1,1 +1,1 @@
-The second project in the Front End Devlopment Libraries where you build a MArkdown Previewer
+The third project in the Frontend Devlopment Libraries where you build a Drum Machine
