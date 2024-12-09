@@ -1,0 +1,103 @@
+body{
+  background-color: #8d8d8d;
+  font-weight: 700;
+  font-family: Russo One;
+}
+
+#drum-machine{
+  background-color: #b3b3b3;
+  outline: 5px solid orange;
+  width: 800px;
+  height: 370px;
+  padding: 10px;
+  display: flex;
+}
+#root{
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.drumpad button{
+  background-color: gray;
+  border: 0;
+  border-radius: 10px;
+  height: 105px;
+  width: 105px;
+  margin: 10px;
+  font-size: 1.8rem;
+  cursor: pointer;
+  font-weight: 700;
+  box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.7);
+}
+
+.drumpad{
+  display: flex;
+  flex-wrap: wrap;
+  width: 450px;
+  height: 100%;
+}
+
+
+.power, .type{
+  width: 100px;
+  background-color: black;
+  height: 30px;
+  margin-top: 15px;
+}
+
+.power button, .type button{
+  width: 48px;
+  height: 30px;
+  cursor: pointer;
+  background-color: blue;
+  border:0;
+}
+
+.controls{
+  width: 350px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+}
+
+#display{
+  width: 300px;
+  background-color: gray;
+  height: 50px;
+  color: black;
+  font-size: 1.8rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+input{
+  width: 300px
+}
+
+[type='range']::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 2px 2px 2px #222, 0 0 2px #2f2f2f;
+  background: #424242;
+  border: 1px solid #000;
+  border-radius: 0;
+}
+[type='range']::-webkit-slider-thumb {
+  box-shadow: 1px 1px 1px #111, 0 0 1px #1e1e1e;
+  border: 0 solid #fff;
+  height: 35px;
+  width: 8px;
+  border-radius: 0;
+  background: blue;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -11px;
+}
