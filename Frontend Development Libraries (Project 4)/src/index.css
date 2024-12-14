@@ -1,0 +1,92 @@
+body{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.calculator{
+  border: 3px solid blue;
+  width: 300px;
+  height: 305px;
+}
+
+.onclickDisplay{
+  background-color: black;
+  width: 100%;
+  height: 35px;
+}
+
+.onclickDisplay p{
+  margin: 0;
+  color: white;
+  font-size: 1.3rem;
+  padding-top: 5px;
+  float: right;
+  padding-right: 5px;
+}
+
+#display{
+  background-color: red;
+  width: 100%;
+  height: 45px;
+}
+
+#display p{
+  margin: 0;
+  color: white;
+  font-size: 1.7rem;
+  padding-top: 5px;
+  float: right;
+  padding-right: 5px;;
+}
+
+.rows1, .rows2, .rows3{
+  height: 45px;
+  width: 100%;
+  background-color: yellow;
+}
+.rows4, .rows5{
+  height: 45px;
+  background-color: yellow;
+  width: 225px;
+}
+#clear{
+  width: 50%;
+  height: 100%;
+}
+#divide, #multiply{
+  width: 25%;
+  height: 100%;
+}
+
+
+.rows2 button, .rows3 button{
+  height: 100%;
+  width: 25%;
+}
+
+#one, #two, #three{
+  height: 45px;
+  width: 75px;
+}
+
+
+#zero{
+  width: 150px;
+  height: 45px;
+}
+
+#decimal{
+  width: 75px;
+  height: 45px;
+}
+
+.last-two{
+  display: flex;
+}
+
+#equals{
+  height: 90px;
+  width: 75px;
+}
