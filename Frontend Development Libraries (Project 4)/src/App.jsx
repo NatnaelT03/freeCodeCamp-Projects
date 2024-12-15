@@ -8,15 +8,23 @@ export default function App(){
     const [onclickDisplay, setOnclickDisplay] = React.useState("")
     const [lastClicked, setLastClicked] = React.useState("")
     const [evaluation, setEvaluation] = React.useState(false)
-
+    const [dot, setDot] = React.useState(true)
+    const [minus, setMinus] = React.useState(0)
+    const [operator, setOperator] = React.useState(0)
+        
     const displayer = (val) => {
-
+     
       if(evaluation){
         setEvaluation(false)
         console.log(evaluation)
         if(["+", "-", "*", "/"].includes(val)){
           setOnclickDisplay(displayOutput + val)
           setDisplayOutput(val)
+          return
+        }
+        if(val === "."){
+          setOnclickDisplay("0" + val)
+          setDisplayOutput("0" + val)
           return
         }
       }
@@ -42,29 +50,41 @@ export default function App(){
       }
 
       else if (val === "+" || val === "-" || val === "*" || val === "/") {
+        setOperator(1)
+        setDot(true)
         setLastClicked(val)
         setDisplayOutput(val)
         if(lastClicked === "+" || lastClicked === "-" || lastClicked === "*" || lastClicked === "/"){
-          setOnclickDisplay((prev) => prev)
+          if (val === "-" && minus === 0){
+              setOnclickDisplay((prev) => prev + val)
+              setMinus(1)
+              return
+          }
+          else if(["+", "*", "/"].includes(val) && minus === 1){
+            setOnclickDisplay((prev) => prev.slice(0,-2) + val)
+            setDisplayOutput(val)
+          }
+          setOnclickDisplay((prev) => prev.slice(0,-1) + val)
         }
-
-
         else {
           // setDisplayOutput((prev) => prev + val)
           setOnclickDisplay((prev) => prev + val)
+         
         }
 
     }
 
     else if (val === "."){
+      
       setLastClicked(val)
-      if(lastClicked !== "."){
-        
+      if(lastClicked !== "." && dot){
+        setDot(false)
         setDisplayOutput((prev) => prev + val)
         setOnclickDisplay((prev) => prev + val)
       }
     }
       else{
+        setMinus(0)
         setLastClicked(val)
         if(displayOutput === "0"){
           setDisplayOutput(val);
@@ -79,6 +99,7 @@ export default function App(){
     }
 
     const clearer = () => {
+      setDot(true)
       setDisplayOutput("0")
       setOnclickDisplay("")
     }

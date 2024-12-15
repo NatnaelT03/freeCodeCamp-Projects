@@ -3,10 +3,12 @@ body{
   align-items: center;
   justify-content: center;
   height: 100vh;
+  background: #c2c2d6;
+
 }
 
 .calculator{
-  border: 3px solid blue;
+  border: 2px solid #47476b;
   width: 300px;
   height: 305px;
 }
@@ -19,15 +21,15 @@ body{
 
 .onclickDisplay p{
   margin: 0;
-  color: white;
-  font-size: 1.3rem;
+  color: orange;
+  font-size: 1.2rem;
   padding-top: 5px;
   float: right;
   padding-right: 5px;
 }
 
 #display{
-  background-color: red;
+  background-color: black;
   width: 100%;
   height: 45px;
 }
@@ -54,12 +56,16 @@ body{
 #clear{
   width: 50%;
   height: 100%;
+  background-color: rgb(209, 42, 42);
 }
 #divide, #multiply{
   width: 25%;
   height: 100%;
+  background-color: rgb(165, 165, 165);
 }
-
+#subtract, #add{
+  background-color: rgb(165, 165, 165);
+}
 
 .rows2 button, .rows3 button{
   height: 100%;
@@ -89,4 +95,19 @@ body{
 #equals{
   height: 90px;
   width: 75px;
+  background-color: rgb(5, 81, 222);
+}
+
+button{
+  border: 0.5px solid black;
+  color: white;
+  font-size: 1.3rem;
+  background-color: gray;
+  
+}
+
+button:hover{
+  border: 0.5px solid gray;
+  color: black;
+  cursor: pointer;
 }
