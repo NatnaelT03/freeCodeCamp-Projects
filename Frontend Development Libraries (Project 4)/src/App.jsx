@@ -10,7 +10,6 @@ export default function App(){
     const [evaluation, setEvaluation] = React.useState(false)
     const [dot, setDot] = React.useState(true)
     const [minus, setMinus] = React.useState(0)
-    const [operator, setOperator] = React.useState(0)
         
     const displayer = (val) => {
      
@@ -50,7 +49,6 @@ export default function App(){
       }
 
       else if (val === "+" || val === "-" || val === "*" || val === "/") {
-        setOperator(1)
         setDot(true)
         setLastClicked(val)
         setDisplayOutput(val)
@@ -67,7 +65,6 @@ export default function App(){
           setOnclickDisplay((prev) => prev.slice(0,-1) + val)
         }
         else {
-          // setDisplayOutput((prev) => prev + val)
           setOnclickDisplay((prev) => prev + val)
          
         }
