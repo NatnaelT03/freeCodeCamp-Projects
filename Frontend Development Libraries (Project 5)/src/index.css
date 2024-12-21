@@ -1,0 +1,93 @@
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  background-color: #1e555c;
+  color: white;
+}
+
+main {
+  text-align: center;
+  background-color: #1e555c;
+  padding: 30px;
+  border-radius: 10px;
+  width: 500px;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.length-checker {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.break, .session {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#break-label, #session-label {
+  font-size: 2.2rem;
+  margin-bottom: 10px;
+  color: white;
+}
+
+.button-align {
+  display: flex;
+  padding: 0px 20px;
+  margin-top: 15px;
+}
+
+button {
+  background-color: #1e555c;
+  border: 0;
+  padding: 0px 20px;
+  font-size: 1.3rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  color: white;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+#break-length, #session-length {
+  font-size: 1.5rem;
+  margin: 10px 0;
+}
+
+#timer-label {
+  font-size: 3.5rem;
+  font-weight: bold;
+  padding: 0;
+  margin: 0; /* Removed margin to reduce space */
+}
+
+#time-left {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin: 10px 0; /* Adjusted margin for better spacing */
+  border: 2px solid #007bff;
+  padding: 10px;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+#start_stop, #reset {
+  margin: 20px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  color: white;
+  font-size: 1rem;
+}
