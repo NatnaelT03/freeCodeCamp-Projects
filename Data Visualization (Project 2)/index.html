@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Visualizing Data with a Scatterplot Graph</title>
+        <style>
+            body{
+        background-color: black;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100vw;
+        height: 100vh;
+        }
+        svg {
+      background-color:   #708090;
+      box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.5); 
+      border: 2px solid #000;
+        }
+        #tooltip{
+        position: absolute;
+        background-color:#718191;
+        padding: 10px;
+        border-radius: 10px solid black;
+        pointer-events: none;
+        font-size: 0.7rem;
+    }
+       
+
+        </style>
+        <script src="https://d3js.org/d3.v6.min.js"></script>
+    </head>
+    <body></body>
+    <script>
+
+        let height= 600
+        let width = 1000
+        let padding = 50
+        let svg
+        let xAxisScale
+        let yAxisScale
+        let xScale
+        let yScale
+
+        let timeConverter = (item) => {
+            const [minutes, seconds] = item.split(":").map(Number)
+            return new Date (1970, 0 , 1 , 0 , minutes, seconds)
+        }
+
+        let generateScales = () => {
+            let yearsArray = data.map((d) => d.Year)
+            let timeArray = data.map((d) => timeConverter(d.Time))
+            xAxisScale = d3.scaleLinear()
+                .domain([d3.min(yearsArray) - 1, d3.max(yearsArray) + 1])
+                .range([padding, width-padding])
+            
+            yAxisScale = d3.scaleTime()
+                            .domain([d3.max(timeArray), d3.min(timeArray)])
+                            .range([height-padding, padding])
+            xScale = d3.scaleLinear()
+                        .domain([d3.min(yearsArray) - 1, d3.max(yearsArray) + 1])
+                        .range([padding, width-padding])
+            yScale = d3.scaleLinear()
+                        .domain([d3.max(timeArray),d3.min(timeArray)])
+                        .range([height - padding, padding])
+
+        }
+
+        let generateAxes = () => {
+
+            let xAxis = d3.axisBottom(xAxisScale)
+                            .tickFormat((d) => d)
+            let yAxis = d3.axisLeft(yAxisScale)
+                            .tickFormat((d) => {
+                                const minutes = d.getMinutes()
+                                const seconds = d.getSeconds()
+                                return `${minutes}:${seconds > 10 ? "" : "0"}${seconds}`
+                            }
+                            )
+
+            svg.append("g")
+                .call(xAxis)
+                .attr("id","x-axis")
+                .attr("transform", `translate(0, ${height - padding})`)
+            
+            svg.append("g")
+                .call(yAxis)
+                .attr("id","y-axis")
+                .attr("transform", `translate(${padding},0)`)
+
+        }
+
+        let addLegend = () => {
+            let legend = svg.append("g")
+                            .attr("id", "legend")
+                            .attr("transform", `translate(${width - padding - 200},${5*padding})`)
+            
+
+                legend.append("rect")
+                        .attr("x", "0")
+                        .attr("y", "0")
+                        .attr("width", "20")
+                        .attr("height", "20")
+                        .attr("fill", "blue")
+                
+                legend.append("text")
+                        .attr("x", "35")
+                        .attr("y", "15")
+                        .text("Doping Allegations")
+
+                legend.append("rect")
+                        .attr("x", 0)
+                        .attr("y", "30")
+                        .attr("width", "20")
+                        .attr("height", "20")
+                        .attr("fill", "orange")
+                
+                legend.append("text")
+                        .attr("x", "35")
+                        .attr("y", "45")
+                        .text("No Doping Allegations")
+        };
+
+        let drawCanvas = () => {
+           svg = d3.select("body")
+              .append("svg")
+              .attr("width", width)
+              .attr("height", height)
+
+            svg.append("text")
+                .attr("id", "title")
+                .text("Doping")
+                .attr("y", padding)
+                .attr("x", (width - 2*padding)/2)
+                .attr("font-size", "30")
+                
+        }
+
+        let generatePlots = () => {
+
+
+            let tooltip = d3.select('body')
+                        .append('div')
+                        .attr('id','tooltip')
+                        .style('visibility', 'hidden')
+
+
+            svg.selectAll("circle")
+                .data(data)
+                .enter()
+                .append("circle")
+                .attr("cx", (d) => xScale(d.Year))
+                .attr("cy", (d) => yScale(timeConverter(d.Time)))
+                .attr("r", "5")
+                .attr("data-xvalue", (d) => d.Year)
+                .attr("data-yvalue", (d) => timeConverter(d.Time))
+                .attr("class", "dot")
+                .attr("fill", (d) => {
+                    return d.Doping === "" ? "orange" : "blue"
+                })
+                .on("mouseover", (event, d) => {
+                    tooltip.transition()
+                            .style("visibility", "visible")
+                    tooltip.html(
+                        `<p>${d.Name}: ${d.Nationality}</p>
+                        <p>Year: ${d.Year}, Time: ${d.Time}</p>
+                        <p>${d.Doping}</p>               
+                        `
+                    )
+                            .style("top", `${event.pageY}px`)
+                            .style("left", `${event.pageX + 10}px`)
+                            .attr("data-year", d.Year)
+
+                    })
+                .on('mouseout', (d) => {
+                    tooltip.transition()
+                            .style("visibility", "hidden")
+                })
+        }
+
+
+
+        let url = 'https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/cyclist-data.json'
+
+        let req = new XMLHttpRequest()
+
+        req.open("GET", url, true)
+        req.onload=() => {
+            data = JSON.parse(req.responseText)
+            drawCanvas()
+            generateScales()
+            generateAxes()
+            generatePlots()
+            addLegend()
+        }
+        req.send()
+    </script>
+    <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+</html>
