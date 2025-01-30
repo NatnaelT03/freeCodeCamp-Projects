@@ -12,9 +12,10 @@
             justify-content: center;
             width: 100vw;
             height: 100vh;
+            color: white;
         }
             svg {
-            background-color:   #708090;
+            background-color:   black;
             box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.5); 
             border: 2px solid #000;
         }
@@ -59,13 +60,15 @@
                         .attr("y", padding)
                         .attr("x", 550)
                         .attr("font-size", "30")
+                        .attr("fill", "white")
 
                     svg.append("text")
                         .attr("id", "description")
                         .text("1753 - 2015: base temperature 8.66℃")
                         .attr("y", 2*padding)
-                        .attr("x", 600)
+                        .attr("x", 650)
                         .attr("font-size", "20")
+                        .attr("fill", "white")
 
         }
 
