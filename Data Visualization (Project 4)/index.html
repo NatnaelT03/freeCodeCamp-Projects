@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Visualize Data with a Choropleth Map</title>
+        <style>
+            body{
+                background-color: white;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100vw;
+                height: 100vh;
+                color: white;
+        }
+            svg{
+                background-color:   black;
+                box-shadow: 10px 10px 10px 10px rgba(0, 0, 0, 0.5); 
+                border: 2px solid #000;
+            }
+            #tooltip{
+                position: absolute;
+                background-color:#718191;
+                padding: 10px;
+                border-radius: 10px solid black;
+                pointer-events: none;
+                font-size: 0.7rem;
+                opacity: 0.8;
+            }
+        </style>
+        <script src="https://d3js.org/d3.v6.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+    </head>
+    <body></body>
+    <script>
+        let svg
+        let width = 1500
+        let height = 800
+        let padding = 50
+        let countyData 
+        let educationData
+        let scale
+        let scaleAxis
+
+        let drawCanvas = () => {
+            svg = d3.select("body")
+                    .append("svg")
+                    .attr("width", width)
+                    .attr("height", height)
+                
+                    svg.append("text")
+                        .attr("id", "title")
+                        .text("United States Educational Attainment")
+                        .attr("y", padding)
+                        .attr("x", 550)
+                        .attr("font-size", "30")
+                        .attr("fill", "white")
+                    
+                        svg.append("text")
+                            .attr("id", "description")
+                            .text("Percentage of adults age 25 and older with a bachelor's degree or higher (2010-2014)")
+                            .attr("y", 2*padding)
+                            .attr("x", 450)
+                            .attr("font-size", "20")
+                            .attr("fill", "white")
+        }
+
+        let drawMap = () => {
+
+            let tooltip = d3.select('body')
+                        .append('div')
+                        .attr('id','tooltip')
+                        .style('visibility', 'hidden')
+
+            let mapGroup = svg.append("g") 
+                            .attr("transform", "translate(300, 150)");
+
+            mapGroup.selectAll("path")
+                .data(countyData)
+                .enter()
+                .append("path")
+                .attr("d", d3.geoPath())
+                .attr("class", "county")
+                // .attr("fill", "red");
+                .attr("fill", (d) => {
+                    let id = d['id']
+                    let countyObj = educationData.find((i) => {
+                        return i["fips"] === id
+                    })
+
+                    return colorPicker(countyObj['bachelorsOrHigher'])
+                })
+                .attr("data-fips", (d) => d['id'])
+                .attr("data-education", (d) => {
+                    let id= d["id"]
+                    let countyObj = educationData.find((i) => {
+                        return i["fips"] === id
+
+                    })
+                    return countyObj['bachelorsOrHigher']
+                                
+        })
+                .on("mouseover", (event, d) => {
+                    let id= d["id"]
+                    let countyObj = educationData.find((i) => {
+                        return i["fips"] === id
+
+                    })
+                    tooltip.transition()
+                            .style("visibility", "visible")
+                        tooltip.html(
+                                `
+                                <div>${countyObj["area_name"]}, ${countyObj["state"]}: ${countyObj["bachelorsOrHigher"]}%
+                                `
+                                     )
+                        .style("top", `${event.pageY}px`)
+                        .style("left", `${event.pageX + 10}px`)
+                        .attr("data-education", countyObj["bachelorsOrHigher"])
+                })
+            .on("mouseout", (d) => {
+                tooltip.transition()
+                        .style("visibility", "hidden")
+            })
+    }
+
+        let colorPicker = (item) => {
+            if(item < 12) return "#e5f5e0"
+            else if(item >= 12 && item < 21) return "#c7e9c0"
+            else if(item >= 21 && item < 30) return "#a1d99b"
+            else if(item >= 30 && item < 39) return "#74c476"
+            else if(item >= 39 && item < 48) return "#41ab5d"
+            else if(item >= 48 && item < 57) return "#238b45"
+            else if(item >= 57) return "#006d2c"
+        }
+        
+        let makeLegend = () => {
+            scale = d3.scaleLinear()
+                        .domain([3,66])
+                        .range([padding, 300])
+
+            scaleAxis = d3.axisBottom(scale)
+                            .tickValues([3,12, 21,30,39,48,57,66])
+                            .tickFormat((d) => `${d}%`)
+
+            let legend = svg.append("g")
+                            .call(scaleAxis)
+                            .attr("id", "legend")
+                            .attr("transform", `translate(880, 150)`)
+
+            for(i=0; i<7; i++){
+                legend.append("rect")
+                .attr("x", 50 + (i*35))
+                .attr("y", -10)
+                .attr("width", 35+i)
+                .attr("height", "10")
+                .attr("fill", colorPicker(i*12))
+            }                
+            
+
+
+        }
+        let countyURL = "https://cdn.freecodecamp.org/testable-projects-fcc/data/choropleth_map/counties.json"
+        let educationURL = "https://cdn.freecodecamp.org/testable-projects-fcc/data/choropleth_map/for_user_education.json" 
+
+        d3.json(countyURL).then(
+            (data,error) => {
+                if(error){
+                    console.log(log)
+                }
+                else{
+                   
+                    countyData = topojson.feature(data, data.objects.counties).features
+                    console.log(countyData)
+                    
+                    d3.json(educationURL).then(
+                        (data, error) => {
+                            if(error){
+                                console.log(log)
+                            }
+                            else{
+                                educationData = data
+                                drawCanvas()
+                                drawMap()
+                                makeLegend()
+                                
+                            }
+                        }
+                    )
+                    
+                }
+            }
+        )
+
+        
+
+        
+    </script>
+    <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+</html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Visualize Data with a Treemap Diagram</title>
+        <style>
+            body{
+                background-color: white;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100vw;
+                height: 100vh;
+                color: white;
+        }
+            svg{
+                background-color:   white;
+                
+                border: 2px solid white;
+            }
+            #tooltip{
+                position: absolute;
+                background-color:#718191;
+                padding: 10px;
+                border-radius: 10px solid black;
+                pointer-events: none;
+                font-size: 0.7rem;
+                opacity: 0.8;
+            }
+        </style>
+        <script src="https://d3js.org/d3.v6.min.js"></script>
+    </head>
+    <body></body>
+    <script>
+        let svg
+        let width = 1300
+        let height = 930
+        let padding = 30
+        let gameURL = "https://cdn.freecodecamp.org/testable-projects-fcc/data/tree_map/video-game-sales-data.json"
+        let gameData
+
+        let drawCanvas = () => {
+            svg = d3.select("body")
+                    .append("svg")
+                    .attr("width", width)
+                    .attr("height", height)
+
+                svg.append("text")
+                    .attr("id", "title")
+                    .text("Video Game Sales")
+                    .attr("y", padding + 70)
+                    .attr("x", 450)
+                    .attr("font-size", 50)
+                    .attr("font-weight", "bold")
+                    .attr("fill", "black")
+
+                svg.append("text")
+                    .attr("id", "description")
+                    .text("Top 100 Most Sold Video Games Grouped by Platform")
+                    .attr("y", padding*2 + 70)
+                    .attr("x", 410)
+                    .attr("font-size", 20)
+                    .attr("fill", "black")
+
+                let anchor = svg.append("a")
+                                    .attr("href", "gameindex.html")
+                                
+                            anchor.append("text")
+                                    .attr("x", 400)
+                                    .attr("y", 30)
+                                    .attr("fill", "blue")
+                                    .style("text-decoration", "underline")
+                                    .style("cursor", "pointer")
+                                    .text("Video Game Data Set |")
+                                    .attr("font-size", "20")
+                        
+                let anchor1 = svg.append("a")
+                                    .attr("href", "movieIndex.html")
+                                
+                            anchor1.append("text")
+                                    .attr("x", 590)
+                                    .attr("y", 30)
+                                    .attr("fill", "blue")
+                                    .style("text-decoration", "underline")
+                                    .style("cursor", "pointer")
+                                    .text("Movies Data Set |")
+                                    .attr("font-size", "20")
+
+                let anchor2 = svg.append("a")
+                                        .attr("href", "kickstarterindex.html")
+
+                            anchor2.append("text")
+                                    .attr("x", 740)
+                                    .attr("y", 30)
+                                    .attr("fill", "blue")
+                                    .style("text-decoration", "underline")
+                                    .style("cursor", "pointer")
+                                    .text("Kickstarter Data Set")
+                                    .attr("font-size", "20")
+                    }
+        
+
+        let drawTreeMap = () => {
+            let tooltip = d3.select("body")
+                            .append("div")
+                            .attr("id", "tooltip")
+                            .style("visibility", "hidden")
+
+            let hierarchy = d3.hierarchy(gameData, (node) => {return node['children']})
+            .sum((node) => node['value'])
+            .sort((node1,node2) => node2['value'] - node1['value'])
+
+            let createTreeMap = d3.treemap()
+                                    .size([1300,700])
+
+            createTreeMap(hierarchy)
+
+            let gameTiles = hierarchy.leaves()
+            let treeGroup = svg.append("g")
+                                .attr("transform", "translate(0,150)")
+            
+            let block = treeGroup.selectAll("g")
+                                .data(gameTiles)
+                                .enter()
+                                .append("g")
+                                .attr("transform", (d) => `translate(${d['x0']}, ${d['y0']})`)
+
+            block.append("rect")
+                .attr("class", "tile")
+                .attr("fill", (d) => colorPicker(d['data']['category']))
+                .attr("data-name", (d)=> d['data']['name'])
+                .attr("data-category", (d) => d['data']['category'])
+                .attr('data-value', (d) => d['data']['value'])
+                .attr('width', (d) => d['x1'] - d['x0'])
+                .attr('height', (d) => d['y1'] - d['y0'])
+                .on("mouseover", (event,d) => {
+                    tooltip.transition()
+                            .style("visibility", "visible")
+                    tooltip.html(
+                        `
+                        <div>Name: ${d['data']['name']}</div></br>
+                        <div>Category: ${d['data']['category']}</div></br>
+                        <div>Value: ${d['data']['value']}</div>
+                        `)
+                        .style("top", `${event.pageY}px`)
+                        .style("left", `${event.pageX + 10}px`)
+                        .attr("data-value", d['data']['value'])
+                })
+                .on("mouseout", (I) => {
+                    tooltip.transition()
+                            .style('visibility', 'hidden')
+                })
+
+
+            block.append('text')
+                .text((d) => d['data']['name'])
+                .attr("x", 5)
+                .attr("y",20)
+        }
+
+        let colorPicker = (item) => {
+            if (item === "Wii") return "rgb(76,146,195)"
+            else if(item === "DS") return "rgb(190,210,237)"
+            else if(item === "X360") return "rgb(255,153,62)"
+            else if(item === "GB") return "rgb(255,201,147)"
+            else if(item === "PS3") return "rgb(86,179,86)"
+            else if(item === "NES") return "rgb(173,229,161)"
+            else if(item === "PS2") return "rgb(222,82,83)"
+            else if(item === "3DS") return "rgb(255,173,171)"
+            else if(item === "PS4") return "rgb(169,133,202)"
+            else if(item === "SNES") return "rgb(209,192,221)"
+            else if(item === "PS") return "rgb(163,120,111)"
+            else if(item === "N64") return "rgb(208,176,169)"
+            else if(item === "GBA") return "rgb(233,146,206)"
+            else if(item === "XB") return "rgb(249,197,219)"
+            else if(item === "PC") return "rgb(153,153,153)"
+            else if(item === "2600") return "rgb(210,210,210)"
+            else if(item === "PSP") return "rgb(201,202,78)"
+            else if(item === "XOne") return "rgb(226,226,164)"
+        }
+
+        let makeLegend = () => {
+            let legend = svg.append("g")
+                            .attr("id", "legend")
+            for(i = 0; i<18; i++){
+                legend.append("rect")
+                        .attr("x", i*70)
+                        .attr("y", 900)
+                        .attr("fill", colorPicker(gameData.children[i]['name']))
+                        .attr("width", 20)
+                        .attr("height", 20)
+                        .attr("class", "legend-item")
+                legend.append("text")
+                        .attr("x", 25 + (i*70))
+                        .attr("y", 915)
+                        .attr("fill", colorPicker(gameData.children[i]['name']))
+                        .text(gameData.children[i]['name'])
+
+            }
+
+        }
+
+        d3.json(gameURL).then(
+            (data,error) => {
+                if(error) console.log(log)
+                else{
+                    gameData = data
+
+                    drawCanvas()
+                    drawTreeMap()
+                    makeLegend()
+                }
+            }
+        )
+    </script>
+    <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
+</html>
